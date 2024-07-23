@@ -3,8 +3,11 @@ import Joi from 'joi';
 
 const schema = Joi.object({
   nombre: Joi.string().min(3).required(),
-  monto: Joi.string().min(5).required(),
-  fecha: Joi.string().min(2).max(10).required(),
+  monto: Joi.string().min(1).required(),
+  fecha: Joi.alternatives().try(
+    Joi.string().min(2).max(10),  // Para fechas en formato de cadena
+    Joi.number()                  // Para fechas en formato numérico
+  ).required(),
 });
 
 export const validarCartera = (req: Request, res: Response, next: NextFunction) => {
@@ -14,3 +17,4 @@ export const validarCartera = (req: Request, res: Response, next: NextFunction) 
   }
   next();
 };
+

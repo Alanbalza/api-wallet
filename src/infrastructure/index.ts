@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 // Configurar Mongoose
 mongoose.connect(process.env.MONGODB_URI || '')
   .then(() => {
